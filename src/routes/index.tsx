@@ -25,22 +25,61 @@ import {
 import { useState } from "react";
 
 import heroImage from "@/assets/fuel-station-hero.jpg";
+import { PricingCalculator } from "@/components/PricingCalculator";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Fuel Flow Pro | Petrol Station Management Kenya" },
-      { name: "description", content: "Manage sales, M-Pesa payments, staff, eTIMS compliance and every fuel station branch from one real-time platform." },
-      { property: "og:title", content: "Fuel Flow Pro | Petrol Station Management Kenya" },
-      { property: "og:description", content: "Real-time control for modern Kenyan fuel stations." },
+      { title: "Fuel Flow Pro | Petrol Station Management Software Kenya" },
+      { name: "description", content: "Manage fuel sales, M-Pesa reconciliation, staff shifts, eTIMS compliance and every branch from one real-time platform. From KES 3,500 per branch." },
+      { property: "og:title", content: "Fuel Flow Pro | Petrol Station Management Software Kenya" },
+      { property: "og:description", content: "Real-time control for modern Kenyan fuel stations: sales, M-Pesa, staff and eTIMS in one platform." },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "/" },
+      { property: "og:site_name", content: "Fuel Flow Pro" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Fuel Flow Pro | Petrol Station Management Software Kenya" },
+      { name: "twitter:description", content: "Real-time control for modern Kenyan fuel stations." },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          name: "Fuel Flow Pro",
+          applicationCategory: "BusinessApplication",
+          operatingSystem: "Web",
+          description: "Petrol station management platform for Kenyan fuel retailers: sales tracking, M-Pesa reconciliation, staff management and eTIMS compliance.",
+          areaServed: "KE",
+          offers: [
+            { "@type": "Offer", name: "Starter", price: "5000", priceCurrency: "KES" },
+            { "@type": "Offer", name: "Growth", price: "4000", priceCurrency: "KES" },
+            { "@type": "Offer", name: "Pro", price: "3500", priceCurrency: "KES" },
+          ],
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqs.map(([q, a]) => ({
+            "@type": "Question",
+            name: q,
+            acceptedAnswer: { "@type": "Answer", text: a },
+          })),
+        }),
+      },
     ],
   }),
   component: Index,
 });
+
 
 const benefits = [
   { icon: Smartphone, title: "M-Pesa at the pump", text: "Accept and reconcile mobile payments instantly, matched directly to each transaction." },
@@ -54,7 +93,9 @@ const benefits = [
 const faqs = [
   ["Can Fuel Flow Pro work across multiple stations?", "Yes. Manage unlimited branches from one dashboard and compare performance in real time."],
   ["How are M-Pesa transactions reconciled?", "Payments are matched to station transactions automatically, reducing manual reconciliation and cash-handling risk."],
-  ["Is Fuel Flow Pro KRA compliant?", "The Premium plan includes eTIMS integration for automatic, KRA-compliant invoicing."],
+  ["Is Fuel Flow Pro KRA compliant?", "Yes. eTIMS integration for automatic KRA-compliant invoicing is included in Pro, and available on Starter and Growth as a flat KSh 3,000/month add-on."],
+  ["How much does it cost?", "Starter is KSh 5,000/month for a single station, Growth is KSh 4,000 per branch for 2–5 branches, and Pro is KSh 3,500 per branch from 6 branches. Prepay annually and save 20%."],
+
   ["Can I see each attendant’s sales?", "Yes. Owners and managers can review attendance, shifts and daily sales performance by attendant."],
   ["Will you help us get started?", "Yes. Our team supports onboarding, branch setup and staff training so your operation can move smoothly."],
 ];
@@ -144,7 +185,19 @@ function Index() {
           <div className="mt-12 grid gap-4 sm:grid-cols-3">{[{i:Smartphone,t:"M-Pesa",s:"Direct payment reconciliation"},{i:Landmark,t:"Banks",s:"Seamless transfers & settlement"},{i:ReceiptText,t:"eTIMS · KRA",s:"Compliant e-invoicing"}].map(({i:Icon,t,s})=><div key={t} className="border border-border bg-surface px-6 py-9"><Icon className="mx-auto size-7 text-gold"/><h3 className="mt-5 font-semibold">{t}</h3><p className="mt-2 text-sm text-muted-foreground">{s}</p></div>)}</div>
         </section>
 
-        <section id="pricing" className="border-y border-border bg-surface"><div className="section-shell"><div className="section-head"><div><p className="eyebrow">Straightforward plans</p><h2>Choose the control you need.</h2></div><p>Both plans include guided onboarding and support from a team that understands local fuel retail.</p></div><div className="mx-auto mt-12 grid max-w-4xl gap-5 lg:grid-cols-2"><PriceCard name="Standard" description="Core control for independent stations." features={["Sales & fuel tracking","M-Pesa reconciliation","Staff & attendance","Performance reports"]}/><PriceCard premium name="Premium" description="Advanced compliance for growing networks." features={["Everything in Standard","eTIMS / KRA integration","Unlimited branches","Priority support"]}/></div></div></section>
+        <section id="pricing" className="border-y border-border bg-surface"><div className="section-shell">
+          <div className="section-head"><div><p className="eyebrow">Straightforward plans</p><h2>Priced per branch. Nothing hidden.</h2></div><p>Every plan includes guided onboarding, a free trial on your first branch, no installation fees and support from a team that understands local fuel retail.</p></div>
+          <div className="mt-12 grid gap-5 lg:grid-cols-3">
+            <PriceCard name="Starter" price="KSh 5,000" unit="per month · single station" description="Core control for independent station owners." features={["Core dashboard","Sales & fuel tracking","Staff attendance tracking","M-Pesa reconciliation"]}/>
+            <PriceCard premium name="Growth" price="KSh 4,000" unit="per branch / month · 2–5 branches" description="For small chains running more than one site." features={["Everything in Starter","Multi-branch dashboard","Cross-branch analytics","Full staff management"]}/>
+            <PriceCard name="Pro" price="KSh 3,500" unit="per branch / month · 6+ branches" description="For growing networks and fleet operators." features={["Everything in Growth","eTIMS / KRA integration","API access","Custom reporting & priority support"]}/>
+          </div>
+          <p className="mt-6 text-xs text-muted-foreground">eTIMS integration is included with Pro, or available on Starter and Growth as a flat KSh 3,000/month add-on. Save 20% when you prepay annually.</p>
+          <div className="mt-16"><div className="section-head"><div><p className="eyebrow">Estimate your cost</p><h2>Pricing calculator.</h2></div><p>Move the slider to your number of branches and switch on eTIMS to see your monthly and yearly cost.</p></div>
+            <div className="mt-10"><PricingCalculator /></div>
+          </div>
+        </div></section>
+
 
         <section className="section-shell"><div className="grid gap-6 lg:grid-cols-2"><blockquote className="border-l-2 border-gold py-3 pl-7 sm:pl-10"><p className="font-display text-2xl leading-relaxed sm:text-3xl">“We no longer wait until close of business to understand the day. Fuel Flow Pro gives us the numbers while they still matter.”</p><footer className="mt-6 text-sm text-muted-foreground">— Multi-site station operator, Nairobi</footer></blockquote><div className="grid grid-cols-2 gap-px bg-border"><div className="bg-background p-7"><strong className="text-4xl text-gold">24/7</strong><p className="mt-2 text-sm text-muted-foreground">operational visibility</p></div><div className="bg-background p-7"><strong className="text-4xl text-gold">1 view</strong><p className="mt-2 text-sm text-muted-foreground">for every branch</p></div></div></div></section>
 
@@ -162,4 +215,4 @@ function DashboardMockup() {
   return <div className="dashboard-frame"><div className="flex items-center justify-between border-b border-border px-5 py-4"><div><p className="text-xs text-muted-foreground">All branches</p><p className="mt-1 text-sm font-semibold">Performance overview</p></div><span className="flex items-center gap-2 text-xs text-success"><span className="size-1.5 rounded-full bg-success"/>Live</span></div><div className="grid grid-cols-3 gap-px border-b border-border bg-border"><Metric label="Today’s sales" value="KSh 842K"/><Metric label="Fuel sold" value="8,420 L"/><Metric label="Variance" value="0.3%"/></div><div className="grid gap-5 p-5 md:grid-cols-[1.4fr_0.6fr]"><div><p className="mb-5 text-xs text-muted-foreground">Revenue · last 7 days</p><div className="chart h-44"><span/><span/><span/><span/><span/><span/><span/></div></div><div><p className="mb-4 text-xs text-muted-foreground">Branches</p>{[["Waiyaki Way","312K"],["Mombasa Rd","286K"],["Thika Rd","244K"]].map(([n,v])=><div key={n} className="mb-3 border-b border-border pb-3"><p className="text-xs">{n}</p><p className="mt-1 text-sm font-semibold text-gold">KSh {v}</p></div>)}</div></div></div>;
 }
 function Metric({label,value}:{label:string,value:string}) { return <div className="bg-surface p-4"><p className="text-[0.65rem] text-muted-foreground">{label}</p><strong className="mt-2 block text-base sm:text-xl">{value}</strong></div>; }
-function PriceCard({name,description,features,premium=false}:{name:string;description:string;features:string[];premium?:boolean}) { return <article className={`relative border p-7 sm:p-9 ${premium ? "border-gold bg-card" : "border-border bg-background"}`}>{premium && <span className="absolute right-5 top-5 bg-primary px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-primary-foreground">Most complete</span>}<p className="text-sm font-semibold text-gold">{name}</p><h3 className="mt-4 text-3xl font-semibold">Talk to sales</h3><p className="mt-3 text-sm text-muted-foreground">{description}</p><Button asChild variant={premium?"default":"outline"} className="mt-7 h-11 w-full rounded-sm"><a href="#contact">Request pricing <ChevronRight/></a></Button><ul className="mt-7 space-y-4 border-t border-border pt-7 text-sm">{features.map(x=><li key={x} className="flex gap-3"><Check className="size-4 text-gold"/>{x}</li>)}</ul></article>; }
+function PriceCard({name,price,unit,description,features,premium=false}:{name:string;price:string;unit:string;description:string;features:string[];premium?:boolean}) { return <article className={`relative border p-7 sm:p-9 ${premium ? "border-gold bg-card" : "border-border bg-background"}`}>{premium && <span className="absolute right-5 top-5 bg-primary px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-primary-foreground">Most popular</span>}<p className="text-sm font-semibold text-gold">{name}</p><h3 className="mt-4 text-3xl font-semibold">{price}</h3><p className="mt-2 text-xs uppercase tracking-[0.14em] text-muted-foreground">{unit}</p><p className="mt-4 text-sm text-muted-foreground">{description}</p><Button asChild variant={premium?"default":"outline"} className="mt-7 h-11 w-full rounded-sm"><a href="#contact">Start free trial <ChevronRight/></a></Button><ul className="mt-7 space-y-4 border-t border-border pt-7 text-sm">{features.map(x=><li key={x} className="flex gap-3"><Check className="size-4 text-gold"/>{x}</li>)}</ul></article>; }
