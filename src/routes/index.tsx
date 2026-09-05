@@ -91,7 +91,9 @@ const benefits = [
 const faqs = [
   ["Can Fuel Flow Pro work across multiple stations?", "Yes. Manage unlimited branches from one dashboard and compare performance in real time."],
   ["How are M-Pesa transactions reconciled?", "Payments are matched to station transactions automatically, reducing manual reconciliation and cash-handling risk."],
-  ["Is Fuel Flow Pro KRA compliant?", "The Premium plan includes eTIMS integration for automatic, KRA-compliant invoicing."],
+  ["Is Fuel Flow Pro KRA compliant?", "Yes. eTIMS integration for automatic KRA-compliant invoicing is included in Pro, and available on Starter and Growth as a flat KSh 3,000/month add-on."],
+  ["How much does it cost?", "Starter is KSh 5,000/month for a single station, Growth is KSh 4,000 per branch for 2–5 branches, and Pro is KSh 3,500 per branch from 6 branches. Prepay annually and save 20%."],
+
   ["Can I see each attendant’s sales?", "Yes. Owners and managers can review attendance, shifts and daily sales performance by attendant."],
   ["Will you help us get started?", "Yes. Our team supports onboarding, branch setup and staff training so your operation can move smoothly."],
 ];
