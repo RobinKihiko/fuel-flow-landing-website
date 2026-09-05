@@ -24,6 +24,10 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
+const WHATSAPP_NUMBER = "254719188971";
+const WHATSAPP_DEMO_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=Hello%2C%20I%27d%20like%20to%20book%20a%20demo%20for%20Fuel%20Flow%20Pro.`;
+const WHATSAPP_GENERAL_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=Hello%2C%20I%20have%20an%20enquiry%20about%20Fuel%20Flow%20Pro.`;
+
 import heroImage from "@/assets/fuel-station-hero.jpg";
 import { PricingCalculator } from "@/components/PricingCalculator";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
