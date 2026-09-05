@@ -181,7 +181,19 @@ function Index() {
           <div className="mt-12 grid gap-4 sm:grid-cols-3">{[{i:Smartphone,t:"M-Pesa",s:"Direct payment reconciliation"},{i:Landmark,t:"Banks",s:"Seamless transfers & settlement"},{i:ReceiptText,t:"eTIMS · KRA",s:"Compliant e-invoicing"}].map(({i:Icon,t,s})=><div key={t} className="border border-border bg-surface px-6 py-9"><Icon className="mx-auto size-7 text-gold"/><h3 className="mt-5 font-semibold">{t}</h3><p className="mt-2 text-sm text-muted-foreground">{s}</p></div>)}</div>
         </section>
 
-        <section id="pricing" className="border-y border-border bg-surface"><div className="section-shell"><div className="section-head"><div><p className="eyebrow">Straightforward plans</p><h2>Choose the control you need.</h2></div><p>Both plans include guided onboarding and support from a team that understands local fuel retail.</p></div><div className="mx-auto mt-12 grid max-w-4xl gap-5 lg:grid-cols-2"><PriceCard name="Standard" description="Core control for independent stations." features={["Sales & fuel tracking","M-Pesa reconciliation","Staff & attendance","Performance reports"]}/><PriceCard premium name="Premium" description="Advanced compliance for growing networks." features={["Everything in Standard","eTIMS / KRA integration","Unlimited branches","Priority support"]}/></div></div></section>
+        <section id="pricing" className="border-y border-border bg-surface"><div className="section-shell">
+          <div className="section-head"><div><p className="eyebrow">Straightforward plans</p><h2>Priced per branch. Nothing hidden.</h2></div><p>Every plan includes guided onboarding, a free trial on your first branch, no installation fees and support from a team that understands local fuel retail.</p></div>
+          <div className="mt-12 grid gap-5 lg:grid-cols-3">
+            <PriceCard name="Starter" price="KSh 5,000" unit="per month · single station" description="Core control for independent station owners." features={["Core dashboard","Sales & fuel tracking","Staff attendance tracking","M-Pesa reconciliation"]}/>
+            <PriceCard premium name="Growth" price="KSh 4,000" unit="per branch / month · 2–5 branches" description="For small chains running more than one site." features={["Everything in Starter","Multi-branch dashboard","Cross-branch analytics","Full staff management"]}/>
+            <PriceCard name="Pro" price="KSh 3,500" unit="per branch / month · 6+ branches" description="For growing networks and fleet operators." features={["Everything in Growth","eTIMS / KRA integration","API access","Custom reporting & priority support"]}/>
+          </div>
+          <p className="mt-6 text-xs text-muted-foreground">eTIMS integration is included with Pro, or available on Starter and Growth as a flat KSh 3,000/month add-on. Save 20% when you prepay annually.</p>
+          <div className="mt-16"><div className="section-head"><div><p className="eyebrow">Estimate your cost</p><h2>Pricing calculator.</h2></div><p>Move the slider to your number of branches and switch on eTIMS to see your monthly and yearly cost.</p></div>
+            <div className="mt-10"><PricingCalculator /></div>
+          </div>
+        </div></section>
+
 
         <section className="section-shell"><div className="grid gap-6 lg:grid-cols-2"><blockquote className="border-l-2 border-gold py-3 pl-7 sm:pl-10"><p className="font-display text-2xl leading-relaxed sm:text-3xl">“We no longer wait until close of business to understand the day. Fuel Flow Pro gives us the numbers while they still matter.”</p><footer className="mt-6 text-sm text-muted-foreground">— Multi-site station operator, Nairobi</footer></blockquote><div className="grid grid-cols-2 gap-px bg-border"><div className="bg-background p-7"><strong className="text-4xl text-gold">24/7</strong><p className="mt-2 text-sm text-muted-foreground">operational visibility</p></div><div className="bg-background p-7"><strong className="text-4xl text-gold">1 view</strong><p className="mt-2 text-sm text-muted-foreground">for every branch</p></div></div></div></section>
 
