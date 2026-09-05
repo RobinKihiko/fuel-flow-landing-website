@@ -73,7 +73,7 @@ export function PricingCalculator() {
             min={1}
             max={40}
             step={1}
-            onValueChange={([v]) => setBranches(v)}
+            onValueChange={(v) => setBranches(v[0] ?? 1)}
             aria-label="Number of branches"
           />
         </div>
