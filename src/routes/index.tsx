@@ -31,16 +31,53 @@ import { Button } from "@/components/ui/button";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Fuel Flow Pro | Petrol Station Management Kenya" },
-      { name: "description", content: "Manage sales, M-Pesa payments, staff, eTIMS compliance and every fuel station branch from one real-time platform." },
-      { property: "og:title", content: "Fuel Flow Pro | Petrol Station Management Kenya" },
-      { property: "og:description", content: "Real-time control for modern Kenyan fuel stations." },
+      { title: "Fuel Flow Pro | Petrol Station Management Software Kenya" },
+      { name: "description", content: "Manage fuel sales, M-Pesa reconciliation, staff shifts, eTIMS compliance and every branch from one real-time platform. From KES 3,500 per branch." },
+      { property: "og:title", content: "Fuel Flow Pro | Petrol Station Management Software Kenya" },
+      { property: "og:description", content: "Real-time control for modern Kenyan fuel stations: sales, M-Pesa, staff and eTIMS in one platform." },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "/" },
+      { property: "og:site_name", content: "Fuel Flow Pro" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Fuel Flow Pro | Petrol Station Management Software Kenya" },
+      { name: "twitter:description", content: "Real-time control for modern Kenyan fuel stations." },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          name: "Fuel Flow Pro",
+          applicationCategory: "BusinessApplication",
+          operatingSystem: "Web",
+          description: "Petrol station management platform for Kenyan fuel retailers: sales tracking, M-Pesa reconciliation, staff management and eTIMS compliance.",
+          areaServed: "KE",
+          offers: [
+            { "@type": "Offer", name: "Starter", price: "5000", priceCurrency: "KES" },
+            { "@type": "Offer", name: "Growth", price: "4000", priceCurrency: "KES" },
+            { "@type": "Offer", name: "Pro", price: "3500", priceCurrency: "KES" },
+          ],
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqs.map(([q, a]) => ({
+            "@type": "Question",
+            name: q,
+            acceptedAnswer: { "@type": "Answer", text: a },
+          })),
+        }),
+      },
     ],
   }),
   component: Index,
 });
+
 
 const benefits = [
   { icon: Smartphone, title: "M-Pesa at the pump", text: "Accept and reconcile mobile payments instantly, matched directly to each transaction." },
