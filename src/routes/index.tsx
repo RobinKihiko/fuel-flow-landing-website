@@ -25,7 +25,9 @@ import {
 import { useState } from "react";
 
 import heroImage from "@/assets/fuel-station-hero.jpg";
+import { PricingCalculator } from "@/components/PricingCalculator";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/")({
