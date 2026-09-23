@@ -77,14 +77,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Fuel Flow Pro" },
-      { name: "description", content: "Fuel station management for Kenya." },
       { name: "author", content: "Fuel Flow Pro" },
-      { property: "og:title", content: "Fuel Flow Pro" },
-      { property: "og:description", content: "Fuel station management for Kenya." },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "Fuel Flow Pro" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
