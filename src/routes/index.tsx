@@ -30,6 +30,7 @@ const WHATSAPP_GENERAL_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=Hello%2C%20
 
 import heroImage from "@/assets/fuel-station-hero.jpg";
 import { PricingCalculator } from "@/components/PricingCalculator";
+import { OperationsShowcase, OperationalSafeguards } from "@/components/OperationsShowcase";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 import { Button } from "@/components/ui/button";
@@ -86,7 +87,7 @@ export const Route = createFileRoute("/")({
 
 
 const benefits = [
-  { icon: Smartphone, title: "M-Pesa at the pump", text: "Accept and reconcile mobile payments instantly, matched directly to each transaction." },
+  { icon: Smartphone, title: "M-Pesa at the pump", text: "Track mobile payments alongside sales and review matching exceptions with your configured payment integration." },
   { icon: BarChart3, title: "Live sales visibility", text: "See litres, revenue and performance across every shift and station in real time." },
   { icon: Building2, title: "Every branch, one view", text: "Run a growing network without travelling to each site. Compare and control centrally." },
   { icon: Users, title: "Accountable teams", text: "Track attendance, shifts and individual attendant sales from wherever you are." },
@@ -96,12 +97,16 @@ const benefits = [
 
 const faqs = [
   ["Can Fuel Flow Pro work across multiple stations?", "Yes. Manage unlimited branches from one dashboard and compare performance in real time."],
-  ["How are M-Pesa transactions reconciled?", "Payments are matched to station transactions automatically, reducing manual reconciliation and cash-handling risk."],
-  ["Is Fuel Flow Pro KRA compliant?", "Yes. eTIMS integration for automatic KRA-compliant invoicing is included in Pro, and available on Starter and Growth as a flat KSh 3,000/month add-on."],
+  ["How are M-Pesa transactions reconciled?", "Compare payment records with sales to review matched transactions, missing payments, amount mismatches and pending transactions. Automatic confirmation depends on a configured and tested Daraja integration."],
+  ["Does Fuel Flow Pro support eTIMS?", "eTIMS is offered with Pro, and on Starter and Growth as a flat KSh 3,000/month add-on. Confirm the configuration, provider requirements and availability for your station during onboarding."],
   ["How much does it cost?", "Starter is KSh 5,000/month for a single station, Growth is KSh 4,000 per branch for 2–5 branches, and Pro is KSh 3,500 per branch from 6 branches. Prepay annually and save 20%."],
 
   ["Can I see each attendant’s sales?", "Yes. Owners and managers can review attendance, shifts and daily sales performance by attendant."],
   ["Will you help us get started?", "Yes. Our team supports onboarding, branch setup and staff training so your operation can move smoothly."],
+  ["Can I track tanks, deliveries and stock differences?", "The station workflow covers tank records, deliveries, physical dips and stock variance reviews. Explore the inventory screens and your stock-accounting requirements during a demo."],
+  ["Can managers and attendants have different access?", "Fuel Flow Pro separates administrator, manager and attendant responsibilities, with assigned-branch access and restricted sensitive records. Confirm your team’s permissions during setup."],
+  ["What happens when a station loses internet?", "Offline sales capture and synchronization depend on the configured workflow. Confirm availability in your demo; offline M-Pesa payment confirmation and all administrative operations are not promised."],
+  ["Which reports can I review?", "Explore sales by branch, attendant, pump and fuel grade; inventory and delivery records; expenses; reconciliation exceptions; and PDF or Excel export workflows."],
 ];
 
 function Logo({ compact = false }: { compact?: boolean }) {
@@ -128,12 +133,12 @@ function Index() {
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 lg:px-8">
           <Logo />
           <nav className="hidden items-center gap-8 text-sm text-muted-foreground lg:flex" aria-label="Main navigation">
-            <a className="nav-link" href="#benefits">Benefits</a><a className="nav-link" href="#platform">Platform</a><a className="nav-link" href="#pricing">Pricing</a><a className="nav-link" href="#faq">FAQ</a>
+            <a className="nav-link" href="#benefits">Benefits</a><a className="nav-link" href="#platform">Platform</a><a className="nav-link" href="#operations">Operations</a><a className="nav-link" href="#pricing">Pricing</a><a className="nav-link" href="#faq">FAQ</a>
           </nav>
           <Button asChild className="hidden h-11 rounded-sm px-6 font-semibold lg:inline-flex"><a href={WHATSAPP_DEMO_LINK} target="_blank" rel="noopener noreferrer">Book a demo <ArrowRight /></a></Button>
           <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation">{menuOpen ? <X /> : <Menu />}</Button>
         </div>
-        {menuOpen && <nav className="border-t border-border bg-background px-5 py-5 lg:hidden"><div className="flex flex-col gap-4 text-sm"><a href="#benefits" onClick={() => setMenuOpen(false)}>Benefits</a><a href="#platform" onClick={() => setMenuOpen(false)}>Platform</a><a href="#pricing" onClick={() => setMenuOpen(false)}>Pricing</a><a href="#faq" onClick={() => setMenuOpen(false)}>FAQ</a></div></nav>}
+        {menuOpen && <nav className="border-t border-border bg-background px-5 py-5 lg:hidden"><div className="flex flex-col gap-4 text-sm"><a href="#benefits" onClick={() => setMenuOpen(false)}>Benefits</a><a href="#platform" onClick={() => setMenuOpen(false)}>Platform</a><a href="#operations" onClick={() => setMenuOpen(false)}>Operations</a><a href="#pricing" onClick={() => setMenuOpen(false)}>Pricing</a><a href="#faq" onClick={() => setMenuOpen(false)}>FAQ</a></div></nav>}
       </header>
 
       <main>
@@ -144,7 +149,7 @@ function Index() {
             <div className="max-w-3xl">
               <div className="mb-7 inline-flex items-center gap-2 border border-border bg-background/60 px-3 py-2 text-xs uppercase tracking-[0.16em] text-gold backdrop-blur"><span className="size-1.5 bg-success" /> Built for Kenya’s fuel retail market</div>
               <h1 className="max-w-3xl font-display text-5xl font-semibold leading-[1.02] sm:text-6xl lg:text-7xl">The complete fuel station <span className="text-gold-gradient">management system.</span></h1>
-              <p className="mt-6 max-w-2xl text-base leading-7 text-soft sm:text-lg">Control sales in real time, accept M-Pesa at the pump and see every branch clearly—from one secure platform.</p>
+              <p className="mt-6 max-w-2xl text-base leading-7 text-soft sm:text-lg">Bring fuel sales, tank inventory, M-Pesa reconciliation, staff and branch reporting together—from forecourt operations to financial oversight.</p>
               <div className="mt-9 flex flex-wrap gap-3">
                 <Button asChild size="lg" className="h-12 rounded-sm px-7 text-base font-semibold"><a href={WHATSAPP_DEMO_LINK} target="_blank" rel="noopener noreferrer">Book a demo <ArrowRight /></a></Button>
                 <Button asChild size="lg" variant="outline" className="h-12 rounded-sm border-border bg-background/30 px-7 text-base backdrop-blur hover:bg-secondary"><a href="#pricing">See pricing</a></Button>
@@ -165,7 +170,7 @@ function Index() {
           <div className="section-shell">
             <p className="eyebrow">From forecourt to forecast</p><h2 className="mt-3 max-w-2xl">Simple at the pump. Powerful at the top.</h2>
             <ol className="mt-12 grid gap-8 lg:grid-cols-4">
-              {["Record every sale", "Collect payment", "Reconcile instantly", "Act on live insight"].map((step, i) => <li key={step} className="relative border-t border-border pt-6"><span className="text-sm font-semibold text-gold">0{i + 1}</span><h3 className="mt-5 text-lg font-semibold">{step}</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">{["Attendants capture pump sales on a straightforward interface.", "Receive M-Pesa or record other payment methods securely.", "Transactions and shifts match automatically with fewer errors.", "Owners see trends, exceptions and branch performance live."][i]}</p></li>)}
+              {["Receive & record fuel", "Sell & issue receipts", "Reconcile & review", "Report & take action"].map((step, i) => <li key={step} className="relative border-t border-border pt-6"><span className="text-sm font-semibold text-gold">0{i + 1}</span><h3 className="mt-5 text-lg font-semibold">{step}</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">{["Capture deliveries, tank readings and branch fuel prices.", "Record litres or amounts, payment details and attendant activity.", "Compare sales, payments and stock; review unresolved exceptions.", "Explore branch results, expenses and exportable reports."][i]}</p></li>)}
             </ol>
           </div>
         </section>
@@ -176,6 +181,8 @@ function Index() {
             <DashboardMockup />
           </div>
         </section>
+
+        <OperationsShowcase demoLink={WHATSAPP_DEMO_LINK} />
 
         <section className="border-y border-border bg-surface">
           <div className="section-shell grid gap-14 lg:grid-cols-2">
@@ -188,6 +195,8 @@ function Index() {
           <p className="eyebrow">Connected to the way Kenya pays</p><h2 className="mx-auto mt-3 max-w-2xl">Integrations that keep business moving.</h2>
           <div className="mt-12 grid gap-4 sm:grid-cols-3">{[{i:Smartphone,t:"M-Pesa",s:"Direct payment reconciliation"},{i:Landmark,t:"Banks",s:"Seamless transfers & settlement"},{i:ReceiptText,t:"eTIMS · KRA",s:"Compliant e-invoicing"}].map(({i:Icon,t,s})=><div key={t} className="border border-border bg-surface px-6 py-9"><Icon className="mx-auto size-7 text-gold"/><h3 className="mt-5 font-semibold">{t}</h3><p className="mt-2 text-sm text-muted-foreground">{s}</p></div>)}</div>
         </section>
+
+        <OperationalSafeguards />
 
         <section id="pricing" className="border-y border-border bg-surface"><div className="section-shell">
           <div className="section-head"><div><p className="eyebrow">Straightforward plans</p><h2>Priced per branch. Nothing hidden.</h2></div><p>Every plan includes guided onboarding, a free trial on your first branch, no installation fees and support from a team that understands local fuel retail.</p></div>
@@ -203,7 +212,7 @@ function Index() {
         </div></section>
 
 
-        <section className="section-shell"><div className="grid gap-6 lg:grid-cols-2"><blockquote className="border-l-2 border-gold py-3 pl-7 sm:pl-10"><p className="font-display text-2xl leading-relaxed sm:text-3xl">“We no longer wait until close of business to understand the day. Fuel Flow Pro gives us the numbers while they still matter.”</p><footer className="mt-6 text-sm text-muted-foreground">— Multi-site station operator, Nairobi</footer></blockquote><div className="grid grid-cols-2 gap-px bg-border"><div className="bg-background p-7"><strong className="text-4xl text-gold">24/7</strong><p className="mt-2 text-sm text-muted-foreground">operational visibility</p></div><div className="bg-background p-7"><strong className="text-4xl text-gold">1 view</strong><p className="mt-2 text-sm text-muted-foreground">for every branch</p></div></div></div></section>
+        <section className="section-shell"><div className="grid gap-8 lg:grid-cols-2"><div className="border-l-2 border-gold py-3 pl-7 sm:pl-10"><p className="eyebrow">Built around your working day</p><h2 className="mt-4 text-2xl font-semibold leading-relaxed sm:text-3xl">From opening stock to closing reports, keep the whole operation in view.</h2></div><div className="grid grid-cols-2 gap-px bg-border"><div className="bg-background p-7"><strong className="text-3xl text-gold">3 roles</strong><p className="mt-2 text-sm text-muted-foreground">clear team responsibilities</p></div><div className="bg-background p-7"><strong className="text-3xl text-gold">1 view</strong><p className="mt-2 text-sm text-muted-foreground">for every branch</p></div></div></div></section>
 
         <section id="faq" className="border-t border-border bg-surface"><div className="section-shell grid gap-12 lg:grid-cols-[0.7fr_1.3fr]"><div><p className="eyebrow">Frequently asked</p><h2 className="mt-3">Good questions. Clear answers.</h2></div><Accordion type="single" collapsible className="border-t border-border">{faqs.map(([q,a],i)=><AccordionItem key={q} value={`item-${i}`}><AccordionTrigger className="py-6 text-left text-base hover:no-underline">{q}</AccordionTrigger><AccordionContent className="max-w-2xl pb-6 leading-6 text-muted-foreground">{a}</AccordionContent></AccordionItem>)}</Accordion></div></section>
 
@@ -220,7 +229,7 @@ function Index() {
 }
 
 function DashboardMockup() {
-  return <div className="dashboard-frame"><div className="flex items-center justify-between border-b border-border px-5 py-4"><div><p className="text-xs text-muted-foreground">All branches</p><p className="mt-1 text-sm font-semibold">Performance overview</p></div><span className="flex items-center gap-2 text-xs text-success"><span className="size-1.5 rounded-full bg-success"/>Live</span></div><div className="grid grid-cols-3 gap-px border-b border-border bg-border"><Metric label="Today’s sales" value="KSh 842K"/><Metric label="Fuel sold" value="8,420 L"/><Metric label="Variance" value="0.3%"/></div><div className="grid gap-5 p-5 md:grid-cols-[1.4fr_0.6fr]"><div><p className="mb-5 text-xs text-muted-foreground">Revenue · last 7 days</p><div className="chart h-44"><span/><span/><span/><span/><span/><span/><span/></div></div><div><p className="mb-4 text-xs text-muted-foreground">Branches</p>{[["Waiyaki Way","312K"],["Mombasa Rd","286K"],["Thika Rd","244K"]].map(([n,v])=><div key={n} className="mb-3 border-b border-border pb-3"><p className="text-xs">{n}</p><p className="mt-1 text-sm font-semibold text-gold">KSh {v}</p></div>)}</div></div></div>;
+  return <div className="dashboard-frame"><div className="flex items-center justify-between border-b border-border px-5 py-4"><div><p className="text-xs text-muted-foreground">All branches</p><p className="mt-1 text-sm font-semibold">Performance overview</p></div><span className="text-xs text-gold">Illustrative data</span></div><div className="grid grid-cols-3 gap-px border-b border-border bg-border"><Metric label="Today’s sales" value="KSh 842K"/><Metric label="Fuel sold" value="8,420 L"/><Metric label="Variance" value="0.3%"/></div><div className="grid gap-5 p-5 md:grid-cols-[1.4fr_0.6fr]"><div><p className="mb-5 text-xs text-muted-foreground">Revenue · last 7 days</p><div className="chart h-44"><span/><span/><span/><span/><span/><span/><span/></div></div><div><p className="mb-4 text-xs text-muted-foreground">Branches</p>{[["Waiyaki Way","312K"],["Mombasa Rd","286K"],["Thika Rd","244K"]].map(([n,v])=><div key={n} className="mb-3 border-b border-border pb-3"><p className="text-xs">{n}</p><p className="mt-1 text-sm font-semibold text-gold">KSh {v}</p></div>)}</div></div></div>;
 }
 function Metric({label,value}:{label:string,value:string}) { return <div className="bg-surface p-4"><p className="text-[0.65rem] text-muted-foreground">{label}</p><strong className="mt-2 block text-base sm:text-xl">{value}</strong></div>; }
 function PriceCard({name,price,unit,description,features,premium=false}:{name:string;price:string;unit:string;description:string;features:string[];premium?:boolean}) { return <article className={`relative border p-7 sm:p-9 ${premium ? "border-gold bg-card" : "border-border bg-background"}`}>{premium && <span className="absolute right-5 top-5 bg-primary px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-primary-foreground">Most popular</span>}<p className="text-sm font-semibold text-gold">{name}</p><h3 className="mt-4 text-3xl font-semibold">{price}</h3><p className="mt-2 text-xs uppercase tracking-[0.14em] text-muted-foreground">{unit}</p><p className="mt-4 text-sm text-muted-foreground">{description}</p><Button asChild variant={premium?"default":"outline"} className="mt-7 h-11 w-full rounded-sm"><a href={WHATSAPP_DEMO_LINK} target="_blank" rel="noopener noreferrer">Start free trial <ChevronRight/></a></Button><ul className="mt-7 space-y-4 border-t border-border pt-7 text-sm">{features.map(x=><li key={x} className="flex gap-3"><Check className="size-4 text-gold"/>{x}</li>)}</ul></article>; }
